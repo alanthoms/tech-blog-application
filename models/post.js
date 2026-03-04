@@ -23,6 +23,13 @@ Post.init(
       allowNull: false,
       defaultValue: Sequelize.NOW,
     },
+    category_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "category",
+        key: "id",
+      },
+    },
   },
   {
     sequelize,
@@ -30,7 +37,7 @@ Post.init(
     freezeTableName: true,
     underscored: true,
     modelName: "post",
-  }
+  },
 );
 
 // Export Post model

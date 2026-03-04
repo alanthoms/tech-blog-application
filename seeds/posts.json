@@ -69,54 +69,63 @@
     "title": "The Benefits of Serverless Architecture",
     "content": "Exploring serverless computing and how it reduces costs.",
     "postedBy": "Julia Gold",
-    "createdOn": "2024-01-23T18:25:00Z"
+    "createdOn": "2024-01-23T18:25:00Z",
+    "category_id": 1
   },
   {
     "title": "WebSockets vs HTTP: What's the Difference?",
     "content": "Understanding real-time communication with WebSockets.",
     "postedBy": "Kevin Brown",
-    "createdOn": "2024-01-22T07:40:00Z"
+    "createdOn": "2024-01-22T07:40:00Z",
+    "category_id": 2
   },
   {
     "title": "Automating Tasks with Node.js",
     "content": "Use Node.js for task automation with scripts and schedulers.",
     "postedBy": "Lara White",
-    "createdOn": "2024-01-21T16:50:00Z"
+    "createdOn": "2024-01-21T16:50:00Z",
+    "category_id": 3
   },
   {
     "title": "A Guide to MongoDB Aggregation Pipeline",
     "content": "Learn how to perform advanced queries with MongoDB.",
     "postedBy": "Mike Gray",
-    "createdOn": "2024-01-20T12:35:00Z"
+    "createdOn": "2024-01-20T12:35:00Z",
+    "category_id": 1
   },
   {
     "title": "Why You Should Use Next.js for React Apps",
     "content": "Next.js enhances React with server-side rendering and SEO.",
     "postedBy": "Nina Purple",
-    "createdOn": "2024-01-19T14:20:00Z"
+    "createdOn": "2024-01-19T14:20:00Z",
+    "category_id": 2
   },
   {
     "title": "Understanding OAuth 2.0 Authentication",
     "content": "OAuth 2.0 is a secure authorization framework for web apps.",
     "postedBy": "Oscar Blue",
-    "createdOn": "2024-01-18T09:45:00Z"
+    "createdOn": "2024-01-18T09:45:00Z",
+    "category_id": 3
   },
   {
     "title": "Testing Your Node.js Application",
     "content": "Learn about Jest, Mocha, and other testing frameworks.",
     "postedBy": "Paula Pink",
-    "createdOn": "2024-01-17T11:15:00Z"
+    "createdOn": "2024-01-17T11:15:00Z",
+    "category_id": 3
   },
   {
     "title": "Scaling Node.js Applications",
     "content": "Techniques to handle high traffic with Node.js efficiently.",
     "postedBy": "Quinn Orange",
-    "createdOn": "2024-01-16T15:05:00Z"
+    "createdOn": "2024-01-16T15:05:00Z",
+    "category_id": 1
   },
   {
     "title": "Deploying Your App on AWS with CI/CD",
     "content": "Learn how to automate deployments using AWS and CI/CD pipelines.",
     "postedBy": "Ryan Green",
-    "createdOn": "2024-01-15T08:50:00Z"
+    "createdOn": "2024-01-15T08:50:00Z",
+    "category_id": 2
   }
 ]
