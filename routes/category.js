@@ -30,7 +30,7 @@ app.get("/", async (req, res) => {
 
 app.get("/:id", async (req, res) => {
   try {
-    const category = await Post.findByPk(req.params.id);
+    const category = await Category.findByPk(req.params.id);
     res.json(category);
   } catch (error) {
     res.status(500).json({ error: "Error retrieving category" });
@@ -43,7 +43,7 @@ app.put("/:id", async (req, res) => {
     const { name } = req.body;
     const post = await Category.update(
       { name },
-      { where: { id: req.params.id } }
+      { where: { id: req.params.id } },
     );
     res.json(post);
   } catch (error) {
@@ -52,7 +52,7 @@ app.put("/:id", async (req, res) => {
 });
 
 // Route to delete a category
-app.delete("//:id", async (req, res) => {
+app.delete("/:id", async (req, res) => {
   try {
     const category = await Category.destroy({ where: { id: req.params.id } });
     res.json(category);

@@ -1,5 +1,10 @@
 let token = localStorage.getItem("authToken");
 
+if (token) {
+  document.getElementById("auth-container").classList.add("hidden");
+  document.getElementById("app-container").classList.remove("hidden");
+}
+
 function register() {
   const username = document.getElementById("username").value;
   const email = document.getElementById("email").value;
@@ -81,7 +86,7 @@ function fetchPosts() {
         div.innerHTML = `<h3>${post.title}</h3><p>${
           post.content
         }</p><small>By: ${post.postedBy} on ${new Date(
-          post.createdOn
+          post.createdOn,
         ).toLocaleString()}</small>`;
         postsContainer.appendChild(div);
       });
@@ -91,6 +96,10 @@ function fetchPosts() {
 function createPost() {
   const title = document.getElementById("post-title").value;
   const content = document.getElementById("post-content").value;
+  if (!title || !content) {
+    alert("Please fill title and content");
+    return;
+  }
   fetch("http://localhost:3001/api/posts", {
     method: "POST",
     headers: {
