@@ -96,6 +96,7 @@ function fetchPosts() {
 function createPost() {
   const title = document.getElementById("post-title").value;
   const content = document.getElementById("post-content").value;
+  const category = document.getElementById("post-category").value;
   if (!title || !content) {
     alert("Please fill title and content");
     return;
@@ -106,11 +107,18 @@ function createPost() {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ title, content, postedBy: "User" }),
+    body: JSON.stringify({
+      title,
+      content,
+      postedBy: "User",
+      category_id: parseInt(category),
+    }),
   })
     .then((res) => res.json())
     .then(() => {
-      alert("Post created successfully");
+      alert("Post created successfully"); // Clear inputs
+      document.getElementById("post-title").value = "";
+      document.getElementById("post-content").value = "";
       fetchPosts();
     });
 }
