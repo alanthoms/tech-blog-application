@@ -44,6 +44,8 @@ function login() {
 
         alert("User Logged In successfully");
 
+        const welcome = document.getElementById("welcomeh2");
+        welcome.textContent = `Welcome, ${data.userData.username}!`;
         // Fetch the posts list
         fetchPosts();
 
@@ -72,6 +74,22 @@ function logout() {
   });
 }
 
+function deletePost(id) {
+  if (!confirm("Are you sure?")) return;
+  fetch(`http://localhost:3001/api/posts/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  })
+    .then((res) => {
+      if (res.ok) {
+        fetchPosts();
+      } else {
+        alert("Couldnot delete");
+      }
+    })
+    .catch((err) => console.error("delete error", err));
+}
+
 function fetchPosts() {
   fetch("http://localhost:3001/api/posts", {
     method: "GET",
@@ -88,6 +106,12 @@ function fetchPosts() {
         }</p><small>By: ${post.postedBy} on ${new Date(
           post.createdOn,
         ).toLocaleString()}</small>`;
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.onclick = () => {
+          deletePost(post.id);
+        };
+        div.append(deleteButton);
         postsContainer.appendChild(div);
       });
     });

@@ -16,36 +16,33 @@
       <button onclick="register()">Register</button>
       <hr />
       <h2>Login</h2>
-      <form>
-        <input type="email" id="login-email" placeholder="Email" required />
-        <input
-          type="password"
-          id="login-password"
-          placeholder="Password"
-          required
-        />
-        <button onclick="login()">Login</button>
-      </form>
+      <input type="email" id="login-email" placeholder="Email" required />
+      <input
+        type="password"
+        id="login-password"
+        placeholder="Password"
+        required
+      />
+      <button onclick="login()">Login</button>
     </div>
 
     <div class="container hidden" id="app-container">
-      <h2>Welcome</h2>
+      <h2 id="welcomeh2">Welcome</h2>
       <button onclick="logout()">Logout</button>
       <hr />
       <h2>Create a Post</h2>
-      <form>
-        <input type="text" id="post-title" placeholder="Title" required />
-        <label for="post-category">Choose a Category:</label>
-        <select id="post-category">
-          <option value="1">Technology</option>
-          <option value="2">JavaScript</option>
-          <option value="3">Backend</option>
-          <option value="4">DevOps</option>
-        </select>
-        <textarea id="post-content" placeholder="Content" required></textarea>
+      <input type="text" id="post-title" placeholder="Title" required />
+      <label for="post-category">Choose a Category:</label>
+      <select id="post-category">
+        <option value="1">Technology</option>
+        <option value="2">JavaScript</option>
+        <option value="3">Backend</option>
+        <option value="4">DevOps</option>
+      </select>
+      <textarea id="post-content" placeholder="Content" required></textarea>
 
-        <button onclick="createPost()">Submit Post</button>
-      </form>
+      <button onclick="createPost()">Submit Post</button>
+
       <hr />
       <h2>Posts</h2>
       <button onclick="fetchPosts()">Load Posts</button>
