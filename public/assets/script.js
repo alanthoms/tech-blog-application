@@ -91,7 +91,12 @@ function deletePost(id) {
 }
 
 function fetchPosts() {
-  fetch("http://localhost:3001/api/posts", {
+  const filterCategory = document.getElementById("filter-category").value;
+  let url = "http://localhost:3001/api/posts";
+  if (filterCategory) {
+    url += `?category=${filterCategory}`;
+  }
+  fetch(url, {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   })
@@ -101,7 +106,7 @@ function fetchPosts() {
       postsContainer.innerHTML = "";
       posts.forEach((post) => {
         const div = document.createElement("div");
-        div.innerHTML = `<h3>${post.title}</h3><p>${
+        div.innerHTML = `<h3>${post.title}</h3><h3>${post.category_id}</h3><p>${
           post.content
         }</p><small>By: ${post.postedBy} on ${new Date(
           post.createdOn,

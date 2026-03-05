@@ -7,9 +7,8 @@ const { Post } = require("../models/index");
 // Route to add a new post
 app.post("/", async (req, res) => {
   try {
-    const { title, content, postedBy } = req.body;
-    const post = await Post.create({ title, content, postedBy });
-
+    const { title, content, postedBy, category_id } = req.body;
+    const post = await Post.create({ title, content, postedBy, category_id });
     res.status(201).json(post);
   } catch (error) {
     res.status(500).json({ error: "Error adding post" });
@@ -19,7 +18,15 @@ app.post("/", async (req, res) => {
 // Route to get all posts
 app.get("/", async (req, res) => {
   try {
-    const posts = await Post.findAll();
+    const { category } = req.query;
+    let posts;
+    if (category) {
+      posts = await Post.findAll({
+        where: { category_id: category },
+      });
+    } else {
+      posts = await Post.findAll();
+    }
 
     res.json(posts);
   } catch (error) {
@@ -42,7 +49,7 @@ app.put("/:id", async (req, res) => {
     const { title, content, postedBy } = req.body;
     const post = await Post.update(
       { title, content, postedBy },
-      { where: { id: req.params.id } }
+      { where: { id: req.params.id } },
     );
     res.json(post);
   } catch (error) {
