@@ -1,19 +1,23 @@
 let token = localStorage.getItem("authToken");
-let username = localStorage.getItem("username");
+let username = localStorage.getItem("usernameLocal");
 
 if (token) {
   document.getElementById("auth-container").classList.add("hidden");
   document.getElementById("app-container").classList.remove("hidden");
+  const welcome = document.getElementById("welcomeh2");
+  welcome.innerHTML = `Welcome, ${username}!`;
+  // 3. Re-fetch the data
+  fetchPosts();
 }
 
 function register() {
-  const username = document.getElementById("username").value;
+  const usernameInput = document.getElementById("username").value;
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   fetch("http://localhost:3001/api/users", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, email, password }),
+    body: JSON.stringify({ usernameInput, email, password }),
   })
     .then((res) => res.json())
     .then((data) => {
@@ -74,7 +78,7 @@ function logout() {
   }).then(() => {
     // Clear the token from the local storage as we're now logged out
     localStorage.removeItem("authToken");
-    localStorage.removeItem("username");
+    localStorage.removeItem("usernameLocal");
     username = null;
     token = null;
     document.getElementById("auth-container").classList.remove("hidden");

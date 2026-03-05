@@ -3,9 +3,10 @@ const app = require("express").Router();
 
 // import the models
 const { Post } = require("../models/index");
+const { authMiddleware } = require("../utils/auth");
 
 // Route to add a new post
-app.post("/", async (req, res) => {
+app.post("/", authMiddleware, async (req, res) => {
   try {
     const { title, content, postedBy, category_id } = req.body;
     const post = await Post.create({ title, content, postedBy, category_id });
@@ -16,7 +17,7 @@ app.post("/", async (req, res) => {
 });
 
 // Route to get all posts
-app.get("/", async (req, res) => {
+app.get("/", authMiddleware, async (req, res) => {
   try {
     const { category } = req.query;
     let posts;
@@ -34,7 +35,7 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.get("/:id", async (req, res) => {
+app.get("/:id", authMiddleware, async (req, res) => {
   try {
     const post = await Post.findByPk(req.params.id);
     res.json(post);
