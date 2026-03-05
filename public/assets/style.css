@@ -95,3 +95,34 @@ button:active {
   display: flex;
   justify-content: space-between;
 }
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid var(grey);
+  border-radius: 6px;
+  box-sizing: border-box; /* Crucial for padding */
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+#filter-category {
+  border: 3px solid #023608;
+}
