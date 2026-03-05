@@ -1,4 +1,5 @@
 let token = localStorage.getItem("authToken");
+let username = localStorage.getItem("username");
 
 if (token) {
   document.getElementById("auth-container").classList.add("hidden");
@@ -28,6 +29,8 @@ function register() {
 }
 
 function login() {
+  event.preventDefault();
+
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
   fetch("http://localhost:3001/api/users/login", {
@@ -40,12 +43,15 @@ function login() {
       // Save the token in the local storage
       if (data.token) {
         localStorage.setItem("authToken", data.token);
+
+        localStorage.setItem("usernameLocal", data.userData.username);
+        username = data.userData.username;
         token = data.token;
 
-        alert("User Logged In successfully");
+        alert(`Welcome, ${data.userData.username}!`);
 
         const welcome = document.getElementById("welcomeh2");
-        welcome.textContent = `Welcome, ${data.userData.username}!`;
+        welcome.innerHTML = `Welcome, ${username}!`;
         // Fetch the posts list
         fetchPosts();
 
@@ -68,6 +74,8 @@ function logout() {
   }).then(() => {
     // Clear the token from the local storage as we're now logged out
     localStorage.removeItem("authToken");
+    localStorage.removeItem("username");
+    username = null;
     token = null;
     document.getElementById("auth-container").classList.remove("hidden");
     document.getElementById("app-container").classList.add("hidden");
@@ -75,7 +83,7 @@ function logout() {
 }
 
 function deletePost(id) {
-  if (!confirm("Are you sure?")) return;
+  if (!confirm("Are you sure?" + username)) return;
   fetch(`http://localhost:3001/api/posts/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
@@ -139,7 +147,7 @@ function createPost() {
     body: JSON.stringify({
       title,
       content,
-      postedBy: "User",
+      postedBy: username,
       category_id: parseInt(category),
     }),
   })
