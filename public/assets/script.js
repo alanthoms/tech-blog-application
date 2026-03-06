@@ -119,7 +119,7 @@ function fetchPosts() {
       posts.forEach((post) => {
         const div = document.createElement("div");
         div.className = "cardDiv";
-        div.innerHTML = `<h3>${post.title}</h3><h3>${post.category_id}</h3><p>${
+        div.innerHTML = `<h3>${post.title}</h3><h3>${post.category.category_name}</h3><p>${
           post.content
         }</p><small>By: ${post.postedBy} on ${new Date(
           post.createdOn,

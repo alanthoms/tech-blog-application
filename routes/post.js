@@ -2,7 +2,8 @@
 const app = require("express").Router();
 
 // import the models
-const { Post } = require("../models/index");
+const { Post, Category } = require("../models/index");
+
 const { authMiddleware } = require("../utils/auth");
 
 // Route to add a new post
@@ -17,16 +18,27 @@ app.post("/", authMiddleware, async (req, res) => {
 });
 
 // Route to get all posts
-app.get("/", authMiddleware, async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     const { category } = req.query;
     let posts;
     if (category) {
       posts = await Post.findAll({
         where: { category_id: category },
+        include: {
+          model: Category,
+          as: "category",
+          attributes: ["category_name"],
+        },
       });
     } else {
-      posts = await Post.findAll();
+      posts = await Post.findAll({
+        include: {
+          model: Category,
+          as: "category",
+          attributes: ["category_name"],
+        },
+      });
     }
 
     res.json(posts);
