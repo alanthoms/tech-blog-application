@@ -60,6 +60,29 @@
       <button onclick="fetchPosts()">Load Posts</button>
       <div id="posts"></div>
     </div>
+    <button id="myBtn">Open Modal</button>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+
+        <div class="create-container">
+          <input type="text" id="edit-title" placeholder="Title" required />
+          <div>
+            <select id="edit-category">
+              <option value="1">Technology</option>
+              <option value="2">JavaScript</option>
+              <option value="3">Backend</option>
+              <option value="4">DevOps</option>
+            </select>
+          </div>
+          <textarea id="edit-content" placeholder="Content" required></textarea>
+
+          <button onclick="updatePost()">Save Changes</button>
+        </div>
+      </div>
+    </div>
 
     <script src="./assets/script.js"></script>
   </body>

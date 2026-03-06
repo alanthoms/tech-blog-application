@@ -118,17 +118,33 @@ function fetchPosts() {
       postsContainer.innerHTML = "";
       posts.forEach((post) => {
         const div = document.createElement("div");
+        div.className = "cardDiv";
         div.innerHTML = `<h3>${post.title}</h3><h3>${post.category_id}</h3><p>${
           post.content
         }</p><small>By: ${post.postedBy} on ${new Date(
           post.createdOn,
         ).toLocaleString()}</small>`;
+
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
+
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editButton.onclick = () => {
+          openEditModal(post);
+        };
         deleteButton.onclick = () => {
           deletePost(post.id);
         };
-        div.append(deleteButton);
+        if (post.postedBy === username) {
+          const buttonDiv = document.createElement("div");
+          buttonDiv.className = "button-div";
+          buttonDiv.append(editButton);
+          buttonDiv.append(deleteButton);
+
+          div.append(buttonDiv);
+        }
+
         postsContainer.appendChild(div);
       });
     });
@@ -163,3 +179,29 @@ function createPost() {
       fetchPosts();
     });
 }
+
+var modal = document.getElementById("myModal");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+function openEditModal(post) {
+  currentEditingPostId = post.id; // Store the ID for the save function
+  // Populate the modal fields with the post data
+  document.getElementById("edit-title").value = post.title;
+  document.getElementById("edit-content").value = post.content;
+  document.getElementById("edit-category").value = post.category_id;
+  // Open the modal
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
