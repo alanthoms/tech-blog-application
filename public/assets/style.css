@@ -74,6 +74,7 @@ button {
   word-break: break-word;
   border: 0;
   transition: 0.2s ease-in;
+  width: fit-content;
 }
 
 button:hover {

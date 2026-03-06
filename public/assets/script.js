@@ -185,21 +185,46 @@ var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 
 function openEditModal(post) {
-  currentEditingPostId = post.id; // Store the ID for the save function
-  // Populate the modal fields with the post data
+  currentEditingPostId = post.id;
   document.getElementById("edit-title").value = post.title;
   document.getElementById("edit-content").value = post.content;
   document.getElementById("edit-category").value = post.category_id;
-  // Open the modal
   modal.style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
+function saveEditModal() {
+  modalTitle = document.getElementById("edit-title").value;
+  modalContent = document.getElementById("edit-content").value;
+  modalCategory = document.getElementById("edit-category").value;
+  if (!modalTitle || !modalContent) {
+    alert("Please fill title and content");
+    return;
+  }
+  fetch(`http://localhost:3001/api/posts/${currentEditingPostId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      title: modalTitle,
+      content: modalContent,
+      postedBy: username,
+      category_id: parseInt(modalCategory),
+    }),
+  })
+    .then((res) => res.json())
+    .then(() => {
+      modal.style.display = "none";
+      alert("Edit Saved");
+      fetchPosts();
+    });
+}
+
 span.onclick = function () {
   modal.style.display = "none";
 };
 
-// When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";

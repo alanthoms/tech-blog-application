@@ -47,9 +47,9 @@ app.get("/:id", authMiddleware, async (req, res) => {
 // Route to update a post
 app.put("/:id", async (req, res) => {
   try {
-    const { title, content, postedBy } = req.body;
+    const { title, content, postedBy, category_id } = req.body;
     const post = await Post.update(
-      { title, content, postedBy },
+      { title, content, postedBy, category_id },
       { where: { id: req.params.id } },
     );
     res.json(post);
