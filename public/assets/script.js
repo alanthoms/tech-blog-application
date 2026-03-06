@@ -11,13 +11,13 @@ if (token) {
 }
 
 function register() {
-  const usernameInput = document.getElementById("username").value;
+  const username = document.getElementById("register-username").value;
   const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const password = document.getElementById("register-password").value;
   fetch("http://localhost:3001/api/users", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ usernameInput, email, password }),
+    body: JSON.stringify({ username, email, password }),
   })
     .then((res) => res.json())
     .then((data) => {
